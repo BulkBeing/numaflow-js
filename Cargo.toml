@@ -10,8 +10,12 @@ version = "0.1.0"
 crate-type = ["cdylib"]
 
 [dependencies]
-napi = "3.0.0"
-napi-derive = "3.0.0"
+napi = {version="3.5.2", features = ["full"]}
+napi-derive = "3.3.3"
+numaflow = {git = "https://github.com/numaproj/numaflow-rs.git", branch = "main"}
+chrono = "0.4.42"
+tokio = "1.47.1"
+async-trait = "0.1.89"
 
 [build-dependencies]
 napi-build = "2"

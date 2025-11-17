@@ -1,8 +1,21 @@
 import test from 'ava'
 
-import { plus100 } from '../index.js'
+import { MapAsyncServer, messageToDrop } from '../index.js'
 
-test('sync function from native code', (t) => {
-  const fixture = 42
-  t.is(plus100(fixture), fixture + 100)
+test('start and stop the server', async (t) => {
+  const server = new MapAsyncServer(
+    async (datum) => {
+      const value = datum.value.toString('utf-8')
+      console.log(value)
+      return [messageToDrop()]
+    },
+    '/tmp/map.sock',
+    '/tmp/map.info',
+  )
+
+  setTimeout(() => {
+    server.stop()
+  }, 1000)
+  await server.start()
+  t.pass()
 })
